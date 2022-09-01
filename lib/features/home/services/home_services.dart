@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:fake_store/features/home/model/product_model.dart';
 
 abstract class IHomeServices {
-  fetchAllProducts();
+  Future<List<ProductsModel>?> fetchAllProducts();
 }
 
 class HomeServices extends IHomeServices {

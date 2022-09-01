@@ -12,9 +12,9 @@ class HomeInitial extends HomeState {}
 class HomeLoading extends HomeState {}
 
 class HomeLoaded extends HomeState {
-  final List<ProductsModel>? response;
+  final List<ProductsModel>? allProducts;
 
-  const HomeLoaded(this.response);
+  const HomeLoaded(this.allProducts);
 }
 
 class HomeError extends HomeState {
