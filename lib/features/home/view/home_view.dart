@@ -1,7 +1,9 @@
+import 'package:fake_store/core/shopping_cart/shopping_cart_provider.dart';
 import 'package:fake_store/features/home/cubit/home_cubit.dart';
 import 'package:fake_store/features/home/services/home_services.dart';
 import 'package:fake_store/features/single_product/view/single_product_view.dart';
 import 'package:fake_store/product/widgets/rate_stars_widget.dart';
+import 'package:fake_store/product/widgets/shopping_cart_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,7 +20,12 @@ class _HomeViewState extends State<HomeView> {
     return BlocProvider(
       create: (context) => HomeCubit(HomeServices()),
       child: Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          title: const Text("Fake Store"),
+          actions: const [
+            SoppingCartWidget(),
+          ],
+        ),
         body: BlocConsumer<HomeCubit, HomeState>(
           listener: (context, state) {
             if (state is HomeError) {
@@ -46,8 +53,8 @@ class _HomeViewState extends State<HomeView> {
                       decoration: BoxDecoration(
                           border:
                               Border.all(color: Colors.black.withOpacity(0.3))),
-                      margin: EdgeInsets.all(5),
-                      padding: EdgeInsets.all(5),
+                      margin: const EdgeInsets.all(5),
+                      padding: const EdgeInsets.all(5),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,7 +71,7 @@ class _HomeViewState extends State<HomeView> {
                           AspectRatio(
                             aspectRatio: 1,
                             child: Container(
-                              padding: EdgeInsets.only(bottom: 10),
+                              padding: const EdgeInsets.only(bottom: 10),
                               child: Image.network(
                                 state.allProducts![index].image.toString(),
                               ),
@@ -95,14 +102,20 @@ class _HomeViewState extends State<HomeView> {
                                       fontWeight: FontWeight.bold))),
 
                           Container(
-                              margin: EdgeInsets.only(left: 15, right: 15),
+                              margin:
+                                  const EdgeInsets.only(left: 15, right: 15),
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(5),
                                   border: Border.all(
                                       color: Colors.black.withOpacity(0.5))),
                               child: TextButton(
-                                onPressed: (() {}),
+                                onPressed: (() {
+                                  context
+                                      .read<ShoppingCartProvider>()
+                                      .addToCart(
+                                          state.allProducts![index].id as int);
+                                }),
                                 child: const Text("Add to Cart"),
                               ))
                         ],

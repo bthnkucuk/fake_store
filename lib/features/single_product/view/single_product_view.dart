@@ -7,6 +7,8 @@ import 'package:fake_store/product/widgets/rate_stars_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../core/shopping_cart/shopping_cart_provider.dart';
+
 class SingleProductView extends StatefulWidget {
   SingleProductView({super.key, required this.productId});
   int? productId;
@@ -22,6 +24,9 @@ class _SingleProductViewState extends State<SingleProductView> {
       create: (context) =>
           SingleProductCubit(SingleProductServices(), widget.productId),
       child: Scaffold(
+        appBar: AppBar(
+          title: const Text("Fake Store"),
+        ),
         backgroundColor: Colors.white10.withOpacity(0.9),
         bottomSheet: BlocBuilder<SingleProductCubit, SingleProductState>(
           builder: (context, state) {
@@ -49,8 +54,47 @@ class _SingleProductViewState extends State<SingleProductView> {
                         )
                       ],
                     ),
-                    ElevatedButton(
-                        onPressed: () {}, child: const Text("Add to Cart"))
+                    !context
+                            .watch<ShoppingCartProvider>()
+                            .shoppingListById
+                            .containsKey(state.singleProduct!.id)
+                        ? ElevatedButton(
+                            onPressed: () {
+                              context
+                                  .read<ShoppingCartProvider>()
+                                  .addToCart(state.singleProduct!.id as int);
+                            },
+                            child: const Text("Add to Cart"))
+                        : Row(
+                            children: [
+                              IconButton(
+                                  onPressed: (() {
+                                    context
+                                        .read<ShoppingCartProvider>()
+                                        .addToCart(
+                                            state.singleProduct!.id as int);
+                                  }),
+                                  icon: const Icon(
+                                    Icons.add,
+                                    color: Colors.amber,
+                                  )),
+                              Text(context
+                                  .watch<ShoppingCartProvider>()
+                                  .shoppingListById[state.singleProduct!.id]
+                                  .toString()),
+                              IconButton(
+                                  onPressed: (() {
+                                    context
+                                        .read<ShoppingCartProvider>()
+                                        .decramentProductInCart(
+                                            state.singleProduct!.id as int);
+                                  }),
+                                  icon: const Icon(
+                                    Icons.remove,
+                                    color: Colors.amber,
+                                  )),
+                            ],
+                          )
                   ],
                 ),
               );
@@ -61,7 +105,6 @@ class _SingleProductViewState extends State<SingleProductView> {
             }
           },
         ),
-        appBar: AppBar(),
         body: BlocConsumer<SingleProductCubit, SingleProductState>(
           listener: (context, state) {
             if (state is SingleProductError) {

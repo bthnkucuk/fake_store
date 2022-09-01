@@ -37,6 +37,7 @@ dependencies:
 
   #states
   flutter_bloc: ^8.1.1
+  provider: ^6.0.3
   #network
   dio: ^4.0.6           
   #utility 
