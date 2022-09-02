@@ -3,7 +3,7 @@ import 'package:fake_store/features/home/cubit/home_cubit.dart';
 import 'package:fake_store/features/home/services/home_services.dart';
 import 'package:fake_store/features/single_product/view/single_product_view.dart';
 import 'package:fake_store/product/widgets/rate_stars_widget.dart';
-import 'package:fake_store/product/widgets/shopping_cart_widget.dart';
+import 'package:fake_store/product/widgets/fake_store_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,12 +20,7 @@ class _HomeViewState extends State<HomeView> {
     return BlocProvider(
       create: (context) => HomeCubit(HomeServices()),
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text("Fake Store"),
-          actions: const [
-            SoppingCartWidget(),
-          ],
-        ),
+        appBar: FakeStoreAppBar(),
         body: BlocConsumer<HomeCubit, HomeState>(
           listener: (context, state) {
             if (state is HomeError) {

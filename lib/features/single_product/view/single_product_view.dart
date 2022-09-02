@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:fake_store/features/single_product/cubit/single_product_cubit.dart';
 import 'package:fake_store/features/single_product/services/single_product_services.dart';
 import 'package:fake_store/product/func/first_letter_upper.dart';
+import 'package:fake_store/product/widgets/fake_store_app_bar.dart';
 import 'package:fake_store/product/widgets/rate_stars_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,9 +25,7 @@ class _SingleProductViewState extends State<SingleProductView> {
       create: (context) =>
           SingleProductCubit(SingleProductServices(), widget.productId),
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text("Fake Store"),
-        ),
+        appBar: const FakeStoreAppBar(),
         backgroundColor: Colors.white10.withOpacity(0.9),
         bottomSheet: BlocBuilder<SingleProductCubit, SingleProductState>(
           builder: (context, state) {

@@ -1,4 +1,4 @@
-class SingleProductModel {
+class ShoppingCartItemModel {
   int? id;
   String? title;
   var price;
@@ -7,7 +7,7 @@ class SingleProductModel {
   String? image;
   Rating? rating;
 
-  SingleProductModel(
+  ShoppingCartItemModel(
       {this.id,
       this.title,
       this.price,
@@ -16,7 +16,7 @@ class SingleProductModel {
       this.image,
       this.rating});
 
-  SingleProductModel.fromJson(Map<String, dynamic> json) {
+  ShoppingCartItemModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];
     price = json['price'];
