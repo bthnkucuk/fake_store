@@ -33,11 +33,10 @@ class ShoppingCartCubit extends Cubit<ShoppingCartState> {
         summCart += double.parse(response![i].price.toString()) *
             shoppingListByProviderValuse[i];
       }
-      print(summCart);
 
       emit(ShoppingCartLoaded(response, summCart));
     } catch (e) {
-      emit(ShoppingCartError(e));
+      emit(ShoppingCartError(e.toString()));
     }
   }
 }

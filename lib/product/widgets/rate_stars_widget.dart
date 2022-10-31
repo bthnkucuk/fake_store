@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class RateStars extends StatelessWidget {
-  int starCount;
-  int? voleCount;
-  RateStars({Key? key, required this.starCount, required this.voleCount})
+  final int starCount;
+  final int? voleCount;
+  const RateStars({Key? key, required this.starCount, required this.voleCount})
       : super(key: key);
 
   @override

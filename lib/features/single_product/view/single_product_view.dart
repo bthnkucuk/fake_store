@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:fake_store/features/single_product/cubit/single_product_cubit.dart';
 import 'package:fake_store/features/single_product/services/single_product_services.dart';
 import 'package:fake_store/product/func/first_letter_upper.dart';
@@ -11,8 +9,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/shopping_cart/shopping_cart_provider.dart';
 
 class SingleProductView extends StatefulWidget {
-  SingleProductView({super.key, required this.productId});
-  int? productId;
+  const SingleProductView({super.key, required this.productId});
+  final int? productId;
 
   @override
   State<SingleProductView> createState() => _SingleProductViewState();
@@ -48,7 +46,7 @@ class _SingleProductViewState extends State<SingleProductView> {
                         ),
                         const Text(
                           " \$",
-                          style: const TextStyle(
+                          style: TextStyle(
                               fontSize: 15, fontWeight: FontWeight.w500),
                         )
                       ],
@@ -104,12 +102,7 @@ class _SingleProductViewState extends State<SingleProductView> {
             }
           },
         ),
-        body: BlocConsumer<SingleProductCubit, SingleProductState>(
-          listener: (context, state) {
-            if (state is SingleProductError) {
-              Scaffold.of(context).showSnackBar(state.error);
-            }
-          },
+        body: BlocBuilder<SingleProductCubit, SingleProductState>(
           builder: (context, state) {
             if (state is SingleProductLoading) {
               return const Center(child: CircularProgressIndicator());

@@ -24,7 +24,7 @@ class SingleProductCubit extends Cubit<SingleProductState> {
 
       emit(SingleProductLoaded(response));
     } catch (e) {
-      emit(SingleProductError(e));
+      emit(SingleProductError(e.toString()));
     }
   }
 }

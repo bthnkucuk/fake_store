@@ -20,14 +20,8 @@ class _HomeViewState extends State<HomeView> {
     return BlocProvider(
       create: (context) => HomeCubit(HomeServices()),
       child: Scaffold(
-        appBar: FakeStoreAppBar(),
-        body: BlocConsumer<HomeCubit, HomeState>(
-          listener: (context, state) {
-            if (state is HomeError) {
-              Scaffold.of(context).showSnackBar(
-                  SnackBar(content: Text(state.error.toString())));
-            }
-          },
+        appBar: const FakeStoreAppBar(),
+        body: BlocBuilder<HomeCubit, HomeState>(
           builder: (context, state) {
             if (state is HomeLoading) {
               return const Center(child: CircularProgressIndicator());

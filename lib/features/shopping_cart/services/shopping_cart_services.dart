@@ -14,7 +14,6 @@ class ShoppingCartServices extends IShoppingCartServices {
     for (var element in askedProducts) {
       final response =
           await Dio().get("https://fakestoreapi.com/products/$element");
-      print(listem.length);
 
       listem.add(ShoppingCartItemModel.fromJson(response.data));
     }

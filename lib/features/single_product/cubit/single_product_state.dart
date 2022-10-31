@@ -18,7 +18,7 @@ class SingleProductLoaded extends SingleProductState {
 }
 
 class SingleProductError extends SingleProductState {
-  final error;
+  final String error;
 
   SingleProductError(this.error);
 }

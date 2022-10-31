@@ -15,11 +15,11 @@ class ShoppingCartLoaded extends ShoppingCartState {
   final double summCart;
   final List<ShoppingCartItemModel>? shoppingCart;
 
-  ShoppingCartLoaded(this.shoppingCart, this.summCart);
+  const ShoppingCartLoaded(this.shoppingCart, this.summCart);
 }
 
 class ShoppingCartError extends ShoppingCartState {
-  final error;
+  final String error;
 
-  ShoppingCartError(this.error);
+  const ShoppingCartError(this.error);
 }

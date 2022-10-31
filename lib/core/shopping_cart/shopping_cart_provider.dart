@@ -4,7 +4,7 @@ class ShoppingCartProvider with ChangeNotifier {
   bool _isShoppingCartEmpty = true;
   bool get isShoppingCartEmpty => _isShoppingCartEmpty;
 
-  Map<int, int> _shoppingListById = {};
+  final Map<int, int> _shoppingListById = {};
   Map<int, int> get shoppingListById => _shoppingListById;
   void addToCart(int productId) {
     if (_isShoppingCartEmpty == true) {
@@ -18,7 +18,6 @@ class ShoppingCartProvider with ChangeNotifier {
     } else {
       _shoppingListById.addAll({productId: 1});
     }
-    print(_shoppingListById);
     notifyListeners();
   }
 
@@ -39,7 +38,6 @@ class ShoppingCartProvider with ChangeNotifier {
       } else if (_shoppingListById[productId]! == 1) {
         _shoppingListById.remove(productId);
       }
-      print(_shoppingListById);
       if (_shoppingListById.isEmpty) {
         _isShoppingCartEmpty = true;
       }

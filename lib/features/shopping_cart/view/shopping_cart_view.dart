@@ -24,8 +24,6 @@ class _ShoppingCartViewState extends State<ShoppingCartView> {
               child: CircularProgressIndicator(),
             );
           } else if (state is ShoppingCartLoaded) {
-            List allProducts = [];
-
             return Stack(
               children: [
                 Container(

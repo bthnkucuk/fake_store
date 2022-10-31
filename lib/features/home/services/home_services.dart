@@ -11,9 +11,9 @@ class HomeServices extends IHomeServices {
     final response = await Dio().get("https://fakestoreapi.com/products");
     List<ProductsModel>? listem = [];
 
-    (response.data as List).forEach((element) {
+    for (var element in (response.data as List)) {
       listem.add(ProductsModel.fromJson(element));
-    });
+    }
 
     return listem;
   }
